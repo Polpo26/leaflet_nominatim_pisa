@@ -11,10 +11,9 @@
             margin: 0;
             padding: 0;
         }
-
         #map {
-            position: ab;
-            top: 30;
+            position: absolute;
+            top: 0;
             bottom: 0;
             width: 100%;
         }
@@ -23,9 +22,6 @@
 
 <body>
     <div id="map"></div>
-    
-
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script>
@@ -40,7 +36,6 @@
         $.when(counties).done(function() {
             var map = L.map('map')
                 .setView([37.857507, -85.632935], 7);
-
             var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                 subdomains: 'abcd',
@@ -48,9 +43,7 @@
             }).addTo(map);
             // Add requested external GeoJSON to map
             var kyCounties = L.geoJSON(counties.responseJSON).addTo(map);
-
             var bounds = kyCounties.getBounds();
-
             map.fitBounds(bounds);
         });
     </script>
